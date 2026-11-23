@@ -363,7 +363,7 @@ mysql -u root -p
 
 ---
 
-## 🏆 Bonus Challenge (Opsional)
+## 🏆 Challenge (Opsional)
 
 1. **Tambah Update Endpoint**
    - `PUT /api/products/{id}` - Update existing product
