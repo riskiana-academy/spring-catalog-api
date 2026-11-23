@@ -269,20 +269,3 @@ Setelah menggunakan template ini, mahasiswa akan memahami:
 ✅ Konsep JWT dan Stateless Authentication  
 ✅ Best practices dalam API design dan error handling  
 
-## 📌 Notes untuk Dosen
-
-**File-file yang bisa dimodifikasi mahasiswa:**
-- `ProductService.java` - Tambahan business logic
-- `ProductController.java` - Tambahan endpoint
-- `Product.java` - Tambahan field/atribut
-- `ProductCreateRequest.java` - Tambahan validasi
-
-**File-file yang sebaiknya tidak dimodifikasi mahasiswa (provided):**
-- `JwtUtils.java`
-- `SecurityConfig.java`
-- `GlobalExceptionHandler.java`
-
----
-
-**Last Updated:** November 2026  
-**Version:** 1.0
