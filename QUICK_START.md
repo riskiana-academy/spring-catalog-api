@@ -4,7 +4,11 @@
 
 ### 1. Database Setup (1 menit)
 ```bash
-# Buka MySQL Command Line atau MySQL Workbench
+# OPTION A: MySQL akan auto-create database (RECOMMENDED ✅)
+# Jika sudah ada connection ke MySQL, database akan otomatis dibuat!
+# Tidak perlu manual CREATE DATABASE lagi!
+
+# OPTION B: Manual (jika ingin tahu apa yang terjadi)
 mysql -u root -p
 ```
 
@@ -13,14 +17,18 @@ CREATE DATABASE catalog_db;
 EXIT;
 ```
 
+✅ **NEW:** Database akan otomatis dibuat jika belum ada! (via `createDatabaseIfNotExist=true`)
+
 ### 2. Update Database Credentials (1 menit)
 **File:** `src/main/resources/application.properties`
 
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/catalog_db
+spring.datasource.url=jdbc:mysql://localhost:3306/catalog_db?createDatabaseIfNotExist=true
 spring.datasource.username=root
 spring.datasource.password=YOUR_PASSWORD_HERE
 ```
+
+**Penting:** Hanya update `password` jika MySQL Anda menggunakan password selain yang default
 
 ### 3. Run Project (2 menit)
 ```bash

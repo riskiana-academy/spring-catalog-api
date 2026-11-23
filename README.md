@@ -36,6 +36,16 @@ src/main/java/com/budiluhur/spring/catalog/api/
 ## 🚀 Cara Menggunakan Template Ini
 
 ### 1. Setup Database
+✅ **NEW FEATURE:** Database akan otomatis dibuat!
+
+**Option A (Recommended):**
+```bash
+# Database akan auto-create saat aplikasi startup
+# Tidak perlu manual CREATE DATABASE
+# Karena parameter: ?createDatabaseIfNotExist=true
+```
+
+**Option B (Manual):**
 ```bash
 # Buat database MySQL
 CREATE DATABASE catalog_db;
@@ -53,10 +63,14 @@ File: `src/main/resources/application.properties`
 
 Sesuaikan konfigurasi database:
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/catalog_db
+spring.datasource.url=jdbc:mysql://localhost:3306/catalog_db?createDatabaseIfNotExist=true
 spring.datasource.username=root
-spring.datasource.password=    # Isi password MySQL Anda
+spring.datasource.password=    # Isi password MySQL Anda (jika ada)
 ```
+
+**Penjelasan parameter:**
+- `createDatabaseIfNotExist=true` → Database auto-dibuat jika belum ada
+- Sangat praktis untuk development & learning!
 
 ### 3. Build & Run Project
 ```bash

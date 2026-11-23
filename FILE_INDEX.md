@@ -11,7 +11,7 @@
 
 1. **[QUICK_START.md](./QUICK_START.md)** ⚡ START HERE!
    - 5-minute setup guide
-   - Database configuration
+   - Database configuration (AUTO-CREATE! ✨)
    - Run your first test
    - Common issues & fixes
    - **Read this first!**
