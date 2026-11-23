@@ -26,28 +26,9 @@ public Product createProduct(@RequestBody ProductCreateRequest request) {
 **Solution dengan @Valid + Annotations:**
 
 #### Step 1: Lihat ProductCreateRequest.java
-```java
-@NotBlank(message = "ID produk wajib diisi")
-private String id;
 
-@NotBlank(message = "Nama produk tidak boleh kosong")
-private String name;
-
-@NotNull(message = "Harga produk wajib diisi")
-@Min(value = 1000, message = "Harga minimal Rp 1.000")
-private Double price;
-```
 
 #### Step 2: Gunakan @Valid di Controller
-```java
-@PostMapping
-public ResponseEntity<Product> createProduct(
-    @Valid @RequestBody ProductCreateRequest request  // Tambah @Valid
-) {
-    Product product = productService.createProduct(request);
-    return ResponseEntity.status(201).body(product);
-}
-```
 
 #### Step 3: Spring otomatis akan validate & throw MethodArgumentNotValidException
 
