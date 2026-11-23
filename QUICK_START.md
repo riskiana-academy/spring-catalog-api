@@ -292,6 +292,6 @@ spring.jpa.show-sql=false            # Jangan print SQL di console
 
 ---
 
-**🚀 Ready to Code? Let's Go!**
+
 
 Jika ada pertanyaan, lihat README.md atau LAB_GUIDE.md yang lebih detail.

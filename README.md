@@ -163,30 +163,8 @@ Response (400 Bad Request - Validasi Gagal):
 
 ## 🔍 Fitur-Fitur Utama yang Sudah Diimplementasi
 
-### 1. Input Validation (@Valid)
-Lihat: `dto/ProductCreateRequest.java`
 
-```java
-@NotBlank(message = "ID produk wajib diisi")
-private String id;
-
-@NotBlank(message = "Nama produk tidak boleh kosong")
-private String name;
-
-@NotNull(message = "Harga produk wajib diisi")
-@Min(value = 1000, message = "Harga minimal Rp 1.000")
-private Double price;
-```
-
-Gunakan `@Valid` di Controller:
-```java
-@PostMapping
-public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductCreateRequest request) {
-    // ...
-}
-```
-
-### 2. Java 8 Optional + Lambda
+### 1. Java 8 Optional + Lambda
 Lihat: `service/ProductService.java`
 
 ```java
@@ -199,25 +177,9 @@ public Product getProductById(String id) {
 }
 ```
 
-### 3. Global Exception Handling
-Lihat: `exception/GlobalExceptionHandler.java`
 
-```java
-@RestControllerAdvice
-public class GlobalExceptionHandler {
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidation(...) {
-        // Menangani error validasi otomatis
-    }
-    
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleNotFound(...) {
-        // Menangani custom exception
-    }
-}
-```
 
-### 4. JWT Authentication
+### 2. JWT Authentication
 Lihat: `config/JwtUtils.java` dan `config/SecurityConfig.java`
 
 **Generate Token:**

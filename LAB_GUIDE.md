@@ -9,13 +9,13 @@
 
 ---
 
-## PART 1: Input Validation & Exception Handling (45 Menit)
+## PART 1: Input Validation & Exception Handling 
 
 ### 1.1 Memahami Bean Validation
 
 **Problem tanpa validation:**
 ```java
-// Controller naif tanpa validasi
+// Controller  tanpa validasi
 @PostMapping
 public Product createProduct(@RequestBody ProductCreateRequest request) {
     // Bagaimana jika id kosong? name null? price negatif?
@@ -103,7 +103,7 @@ public ResponseEntity<Map<String, String>> handleValidation(MethodArgumentNotVal
 
 ---
 
-## PART 2: Java 8 Optional + Lambda (25 Menit)
+## PART 2: Java 8 Optional + Lambda 
 
 ### 2.1 Problem: NullPointerException
 
@@ -174,7 +174,7 @@ productRepository.findById(id)
 
 ---
 
-## PART 3: JWT Authentication (60 Menit)
+## PART 3: JWT Authentication 
 
 ### 3.1 Konsep JWT
 
@@ -383,4 +383,4 @@ mysql -u root -p
 
 ---
 
-**Happy Coding! 🚀**
+
