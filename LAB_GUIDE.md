@@ -344,24 +344,3 @@ mysql -u root -p
 
 ---
 
-## 🏆 Challenge (Opsional)
-
-1. **Tambah Update Endpoint**
-   - `PUT /api/products/{id}` - Update existing product
-
-2. **Tambah Delete Endpoint**
-   - `DELETE /api/products/{id}` - Delete product
-
-3. **Tambah JWT Verification**
-   - Implementasi JWT filter untuk verify token di protected endpoint
-
-4. **Tambah Error Logging**
-   - Log setiap error ke file untuk monitoring
-
-5. **Tambah Unit Tests**
-   - Test ProductService dengan Mockito
-   - Test Controller dengan MockMvc
-
----
-
-

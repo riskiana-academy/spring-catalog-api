@@ -7,81 +7,102 @@ Template starter project untuk pembelajaran Week 10 yang mencakup:
 - **Global Exception Handling**: @RestControllerAdvice untuk menangani error secara terpusat
 - **JWT Authentication**: Spring Security + JWT Token untuk stateless authentication
 
-## 🏗️ Struktur Project
+---
 
-```
-src/main/java/com/budiluhur/spring/catalog/api/
-├── Application.java                 # Spring Boot Main Class
-├── controller/
-│   ├── AuthController.java          # Endpoint: POST /api/auth/login
-│   └── ProductController.java       # Endpoints: GET, POST products
-├── service/
-│   └── ProductService.java          # Business logic dengan Optional + Lambda
-├── model/
-│   └── Product.java                 # JPA Entity
-├── repository/
-│   └── ProductRepository.java       # JPA Repository
-├── dto/
-│   ├── ProductCreateRequest.java   # Request DTO dengan validasi
-│   ├── LoginRequest.java           # Login DTO
-│   └── AuthResponse.java           # Response DTO
-├── exception/
-│   ├── ResourceNotFoundException.java # Custom Exception
-│   └── GlobalExceptionHandler.java   # Centralized Exception Handler
-└── config/
-    ├── SecurityConfig.java          # Spring Security Configuration
-    └── JwtUtils.java               # JWT Token Generator
-```
+## 🚀 Memulai
 
-## 🚀 Cara Menggunakan Template Ini
-
-### 1. Setup Database
-✅ **NEW FEATURE:** Database akan otomatis dibuat!
-
-**Option A (Recommended):**
+### STEP 1: Clone Repository
 ```bash
-# Database akan auto-create saat aplikasi startup
-# Tidak perlu manual CREATE DATABASE
-# Karena parameter: ?createDatabaseIfNotExist=true
+git clone https://github.com/riskiana-academy/spring-catalog-api.git
+cd spring-catalog-api
 ```
 
-**Option B (Manual):**
-```bash
-# Buat database MySQL
-CREATE DATABASE catalog_db;
-```
+### STEP 2: Setup Database
+Database akan otomatis dibuat saat aplikasi startup dengan parameter `?createDatabaseIfNotExist=true`
 
-Atau gunakan command line MySQL:
+**Optional - Manual setup:**
 ```bash
 mysql -u root -p
 > CREATE DATABASE catalog_db;
-> EXIT;
 ```
 
-### 2. Update application.properties (Jika diperlukan)
+### STEP 3: Update application.properties (Jika diperlukan)
 File: `src/main/resources/application.properties`
 
-Sesuaikan konfigurasi database:
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/catalog_db?createDatabaseIfNotExist=true
 spring.datasource.username=root
 spring.datasource.password=    # Isi password MySQL Anda (jika ada)
 ```
 
-**Penjelasan parameter:**
-- `createDatabaseIfNotExist=true` → Database auto-dibuat jika belum ada
-- Sangat praktis untuk development & learning!
-
-### 3. Build & Run Project
+### STEP 4: Build & Run
 ```bash
 # Menggunakan Maven
 mvn clean install
 mvn spring-boot:run
 
-# Atau gunakan IDE (VS Code, IntelliJ) untuk run Application.java
+# Atau menggunakan IDE (VS Code, IntelliJ) → Run Application.java
 ```
 
-Server akan berjalan di: `http://localhost:8080`
+Server berjalan di: `http://localhost:8080`
+
+---
+
+## 🏗️ Struktur Project
+
+```
+src/main/java/com/budiluhur/spring/catalog/api/
+├── Application.java                 # Spring Boot Main Class
+├── controller/
+│   ├── AuthController.java          # POST /api/auth/login
+│   └── ProductController.java       # GET, POST /api/products
+├── service/
+│   └── ProductService.java          # Business logic (Optional + Lambda)
+├── model/
+│   └── Product.java                 # JPA Entity
+├── repository/
+│   └── ProductRepository.java       # JPA Repository
+├── dto/
+│   ├── ProductCreateRequest.java   # Request DTO (dengan validasi)
+│   ├── LoginRequest.java           # Login DTO
+│   └── AuthResponse.java           # Response DTO
+├── exception/
+│   ├── ResourceNotFoundException.java # Custom Exception
+│   └── GlobalExceptionHandler.java   # Global Exception Handler
+└── config/
+    ├── SecurityConfig.java          # Spring Security Configuration
+    └── JwtUtils.java               # JWT Token Generator
+```
+
+---
+
+## 📋 ASSIGNMENT: 4 Steps untuk Mahasiswa
+
+> **👉 Baca file [LAB_GUIDE.md](./LAB_GUIDE.md) untuk instruksi detail!**
+
+Mahasiswa perlu mengimplementasikan 4 step berikut:
+
+### **STEP 1: Tambahkan Validasi Annotations pada ProductCreateRequest.java**
+- File: `src/main/java/com/budiluhur/spring/catalog/api/dto/ProductCreateRequest.java`
+- Task: Tambahkan `@NotBlank`, `@NotNull`, `@Min` annotations pada setiap field
+- Lihat: **LAB_GUIDE.md → PART 1**
+
+### **STEP 2: Pasang @Valid Annotation di ProductController**
+- File: `src/main/java/com/budiluhur/spring/catalog/api/controller/ProductController.java`
+- Task: Tambahkan `@Valid` pada `@RequestBody ProductCreateRequest request` di method `createProduct()`
+- Lihat: **LAB_GUIDE.md → PART 1**
+
+### **STEP 3: Buat Global Exception Handler**
+- File: `src/main/java/com/budiluhur/spring/catalog/api/exception/GlobalExceptionHandler.java`
+- Task: Buat class baru dengan `@RestControllerAdvice` dan `@ExceptionHandler` untuk handle validation errors
+- Lihat: **LAB_GUIDE.md → PART 1**
+
+### **STEP 4: Testing via Postman**
+- Test Login JWT
+- Test Input Valid → Expected 201 Created
+- Test Input Invalid (empty fields) → Expected 400 Bad Request
+- Test ID tidak ada → Expected 404 Not Found
+- Lihat: **LAB_GUIDE.md → POSTMAN Testing Checklist**
 
 ## 📝 API Endpoints
 
@@ -105,7 +126,6 @@ Response (200 OK):
 ### 2. Get All Products
 ```http
 GET /api/products
-Accept: application/json
 
 Response (200 OK):
 [
@@ -113,14 +133,13 @@ Response (200 OK):
     "id": "PROD001",
     "name": "Laptop",
     "price": 15000000.0
-  },
-  ...
+  }
 ]
 ```
 
 ### 3. Get Product by ID
 ```http
-GET /api/products/{id}
+GET /api/products/PROD001
 
 Response (200 OK):
 {
@@ -131,26 +150,26 @@ Response (200 OK):
 
 Response (404 Not Found):
 {
-  "error": "Produk dengan ID 'PROD999' tidak ditemukan!"
+  "error": "Produk dengan ID 'PROD001' tidak ditemukan!"
 }
 ```
 
-### 4. Create New Product (dengan Validation)
+### 4. Create New Product
 ```http
 POST /api/products
 Content-Type: application/json
 
 {
-  "id": "PROD001",
-  "name": "Laptop Gaming",
-  "price": 15000000.0
+  "id": "PROD002",
+  "name": "Mouse",
+  "price": 150000.0
 }
 
 Response (201 Created):
 {
-  "id": "PROD001",
-  "name": "Laptop Gaming",
-  "price": 15000000.0
+  "id": "PROD002",
+  "name": "Mouse",
+  "price": 150000.0
 }
 
 Response (400 Bad Request - Validasi Gagal):
@@ -161,36 +180,7 @@ Response (400 Bad Request - Validasi Gagal):
 }
 ```
 
-## 🔍 Fitur-Fitur Utama yang Sudah Diimplementasi
-
-
-### 1. Java 8 Optional + Lambda
-Lihat: `service/ProductService.java`
-
-```java
-public Product getProductById(String id) {
-    // Menggunakan Java 8 Optional + Lambda () ->
-    return productRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException(
-                "Produk dengan ID '" + id + "' tidak ditemukan!"
-            ));
-}
-```
-
-
-
-### 2. JWT Authentication
-Lihat: `config/JwtUtils.java` dan `config/SecurityConfig.java`
-
-**Generate Token:**
-```java
-String token = jwtUtils.generateToken(username);
-```
-
-**Security Configuration:**
-- `/api/auth/**` → Public (tidak perlu token)
-- `/api/products/**` → Sementara Public (untuk kemudahan lab)
-- Dapat diupdate ke private dengan menambahkan JWT filter
+---
 
 ## 📚 Referensi Validation Annotations
 
@@ -204,30 +194,25 @@ String token = jwtUtils.generateToken(username);
 | `@Email` | Format email valid | `@Email` |
 | `@Pattern` | Regex pattern | `@Pattern(regexp = "^[A-Z].*")` |
 
-## 🧪 Testing dengan Postman
-
-### Import Environment
-Buat environment dengan variable:
-```
-{
-  "token": "<<copy-paste token dari login response>>",
-  "baseUrl": "http://localhost:8080"
-}
-```
-
-### Test Sequence
-1. **Login** → Copy token
-2. **Create Product** → Buat data baru
-3. **Get All Products** → Lihat semua data
-4. **Get Product by ID** → Detail satu produk
-5. **Create dengan Validasi Error** → Kirim data tidak valid, lihat response error
+---
 
 ## 🎓 Learning Outcomes
 
-Setelah menggunakan template ini, mahasiswa akan memahami:
-✅ Bagaimana menggunakan Jakarta Bean Validation (@Valid, @NotBlank, dll)  
-✅ Cara menggunakan Java 8 Optional + Lambda untuk menangani null safely  
-✅ Implementasi Global Exception Handling dengan @RestControllerAdvice  
-✅ Konsep JWT dan Stateless Authentication  
-✅ Best practices dalam API design dan error handling  
+Setelah menyelesaikan assignment ini, mahasiswa akan memahami:
+- ✅ Jakarta Bean Validation dan cara menggunakan `@Valid`
+- ✅ Java 8 Optional + Lambda Expression untuk null-safe programming
+- ✅ Global Exception Handling dengan `@RestControllerAdvice`
+- ✅ JWT Authentication dan stateless security
+- ✅ Best practices dalam API design dan error handling
+
+---
+
+## 📖 Referensi Lengkap
+
+👉 **[LAB_GUIDE.md](./LAB_GUIDE.md)** - Instruksi detail 4 steps assignment
+👉 **[HELP.md](./HELP.md)** - Troubleshooting & FAQ
+
+---
+
+**Happy Coding! 🚀**
 
